@@ -89,7 +89,7 @@ module CohortMe
       end
     end
 
-    return analysis
+    return Hash[analysis.sort]
   end
 
   def self.convert_to_cohort_date(datetime, interval, first_day_of_week)
