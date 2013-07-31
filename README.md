@@ -1,3 +1,19 @@
+'''
+{
+  "2013-06-30" => [
+    [ # first activity
+      {user_id: [count, value], user_id: [count, value]}
+    ],
+    [ # week 0
+      {user_id: [count, value], user_id: [count, value]}
+    ],
+    [ # week 1
+      {user_id: [count, value], user_id: [count, value]}
+    ], 
+  ],
+}
+'''
+
 # Cohort analysis - User retention in a Rails application.
 
 <blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/natekontny">natekontny</a> That's a seriously clever idea. Love it.</p>&mdash; Jesse Kriss (@jkriss) <a href="https://twitter.com/jkriss/status/303934644020211712">February 19, 2013</a></blockquote>

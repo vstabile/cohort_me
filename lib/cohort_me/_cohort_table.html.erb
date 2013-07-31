@@ -1,41 +1,41 @@
+<h2>Cumulative Clients</h2>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>
-        
+        Cohort
       </th>
-
-      <% @cohorts.size.times do |i| %>
+      <th>
+        Activation
+      </th>
+      <% (@analysis.size).times do |i| %>
         <th>
-          <%= i %> <%= @period %>  
+          <%= i %> week
         </th>
       <% end %>
-
     </tr>
   </thead>
-
-  <% @cohorts.each_with_index do |row, index| %>
-
-    <% start = row[1][:count][0] %>
-
+  <% index = 0 %>
+  <% @analysis.each do |cohort, activities| %>
     <tr>
       <td>
-        <%= row[0] %> <br/>
-        <%= start %> users
+        <strong><%= cohort.to_s[5,10] %></strong>
       </td>
-
-      <% (@cohorts.size).times do |i| %>
+      <td>
+        <%= activities[0].size %>
+      </td>
+      <% cumulative = {} %>
+      <% (1..@analysis.size).each do |i| %>
+        <% cumulative.merge!(activities[i]) unless activities[i].nil? %>
         <td>
-          <% if @cohorts.size - index > (i + 1) %>
-            <%= "#{((row[1][:count][i].to_f/start.to_f) * 100.00).round(0)}%" %>
+          <% if (@analysis.size - i) >= index %>
+            <p><%= ((cumulative.size.to_f/activities[0].size)*100).round(0) %>% <small>(<%= cumulative.size %>)</small></p>
           <% else %>
             --
           <% end %>
         </td>
       <% end %>
     </tr>
-
+    <% index += 1 %>
   <% end %>
-
-
 </table>
