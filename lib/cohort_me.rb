@@ -48,7 +48,7 @@ module CohortMe
 
     if %(mysql mysql2).include?(ActiveRecord::Base.connection.instance_values["config"][:adapter])
       select_sql = "#{activity_table_name}.#{activity_user_id} as user_id, #{activity_table_name}.#{activity_time_field}, cohort_date, CEIL(TIMEDIFF(#{activity_table_name}.#{activity_time_field}, cohort_date)/#{time_conversion}) as periods_out"
-    elsif ActiveRecord::Base.connection.instance_values["config"][:adapter] == "postgresql"
+    elsif %(postgresql postgis).include?(ActiveRecord::Base.connection.instance_values["config"][:adapter])
       select_sql = "#{activity_table_name}.#{activity_user_id} as user_id, #{activity_table_name}.#{activity_time_field}, cohort_date, CEIL(extract(epoch from (#{activity_table_name}.#{activity_time_field} - cohort_date))/#{time_conversion}) as periods_out"
     else
       raise "database not supported"
